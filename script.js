@@ -1,15 +1,12 @@
-function sendMessage() {
-    const userInputField = document.getElementById("userInput");
-    const userMessage = userInputField.value.trim();
+async function generateBotResponse(userInput) {
+    const API_URL = "https://replit.com/@meowgpt8/MeowGPT-TinyLLaMA"; // Replace with your actual Replit API URL
 
-    if (!userMessage) return;
+    const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userInput })
+    });
 
-    // Add user's message to the chatbox
-    addMessage("You", userMessage);
-    userInputField.value = ""; // Clear input field
-
-    setTimeout(() => {
-        const botReply = generateBotResponse(userMessage);
-        addMessage("MeowGPT", botReply);
-    }, 1000);
+    const data = await response.json();
+    return data.response || "I'm not sure about that. Can you ask something else?";
 }
