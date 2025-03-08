@@ -24,6 +24,17 @@
         <div class="circle"></div>
     </div>
     
+    <script>
+        function generateBotResponse(userInput) {
+            const responses = {
+                "hi": "Hello! How can I help you?",
+                "who are you": "I am MeowGPT, your friendly chatbot!",
+                "bye": "Goodbye! Have a great day!",
+                "who is the owner of meowgpt": "Hardik Srivastava [AKA] MeowSamOP also on YouTube: <a href='https://www.youtube.com/@MeowSamOP' target='_blank'>https://www.youtube.com/@MeowSamOP</a>"
+            };
+            return responses[userInput.toLowerCase()] || "I'm not sure about that. Can you ask something else?";
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
