@@ -13,7 +13,7 @@
         <div id="chatbox" class="chatbox"></div>
         <div class="input-container">
             <input type="text" id="userInput" placeholder="Type a message...">
-            <button onclick="sendMessage()">Send</button>
+            <button id="sendButton">Send</button>
         </div>
     </div>
     
@@ -25,6 +25,39 @@
     </div>
     
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("script.js is loaded!");
+            document.getElementById("sendButton").addEventListener("click", sendMessage);
+        });
+
+        function sendMessage() {
+            const userInputField = document.getElementById("userInput");
+            const userMessage = userInputField.value.trim();
+
+            if (!userMessage) return;
+
+            addMessage("You", userMessage);
+            userInputField.value = "";
+
+            setTimeout(() => {
+                const botReply = generateBotResponse(userMessage);
+                addMessage("MeowGPT", botReply);
+            }, 1000);
+        }
+
+        function addMessage(sender, message) {
+            const chatbox = document.getElementById("chatbox");
+            if (!chatbox) {
+                console.error("Chatbox not found!");
+                return;
+            }
+
+            const messageElement = document.createElement("p");
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
         function generateBotResponse(userInput) {
             const responses = {
                 "hi": "Hello! How can I help you?",
@@ -40,6 +73,5 @@
             return responses[userInput] || "I'm not sure about that. Can you ask something else?";
         }
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
