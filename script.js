@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    gsap.from(".chat-container", { opacity: 0, y: -50, duration: 1 });
+    gsap.from(".chat-container", { opacity: 0, y: -50, duration: 1, ease: "power2.out" });
 });
 
 const chatbox = document.getElementById("chatbox");
@@ -23,6 +23,8 @@ function addMessage(sender, message) {
     messageElement.classList.add("fade-in");
     chatbox.appendChild(messageElement);
     chatbox.scrollTop = chatbox.scrollHeight;
+
+    gsap.from(messageElement, { opacity: 0, x: 30, duration: 0.5 });
 }
 
 function generateBotResponse(userInput) {
